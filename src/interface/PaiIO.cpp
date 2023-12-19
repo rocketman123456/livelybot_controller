@@ -33,7 +33,7 @@ void PaiIO::sendRecv(const LowlevelCmd *cmd, LowlevelState *state)
 {
     // std::cout << "=================" << std::endl;
     sendCmd(cmd);
-    // std::cout<<"paiIO sendRecv 1\n";
+    std::cout<<"paiIO sendRecv 1\n";
 #if USE
     int num;
     motor_back_t motor_data;
@@ -48,15 +48,15 @@ void PaiIO::sendRecv(const LowlevelCmd *cmd, LowlevelState *state)
     }
 #else
     recvState(state);
-    // std::cout<<"paiIO sendRecv 2\n";
+    std::cout<<"paiIO sendRecv 2\n";
 #endif
 
     cmdPanel->updateVelCmd(state);
-    // std::cout<<"paiIO sendRecv 3\n";
+    std::cout<<"paiIO sendRecv 3\n";
     state->userCmd = cmdPanel->getUserCmd();
-    // std::cout<<"paiIO sendRecv 4\n";
+    std::cout<<"paiIO sendRecv 4\n";
     state->userValue = cmdPanel->getUserValue();
-    // std::cout<<"paiIO sendRecv 5\n";
+    std::cout<<"paiIO sendRecv 5\n";
 }
 void PaiIO::sendCmd(const LowlevelCmd *cmd)
 {
@@ -101,6 +101,7 @@ void PaiIO::recvState(LowlevelState *state)
         state->motorState[i].q = _highState.motorState[i].pos;
         state->motorState[i].dq = _highState.motorState[i].vel;
         state->motorState[i].tauEst = _highState.motorState[i].tau;
+        std::cout<<i<<" "<<state->motorState[i].q <<"\n";
     }
     for (int i = 0; i < 3; i++)
     {
@@ -112,21 +113,21 @@ void PaiIO::recvState(LowlevelState *state)
     state->imu.quaternion[3] = _highState.imu.quaternion[3];
 }
 #if USE // 使用真实机器人
-std::string _use = "_real";
+std::string _use = "_real/";
 #else   // 使用Gazebo
 std::string _use = "_gazebo";
 void PaiIO::initSend()
 {
-    _servo_pub[0] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "L_hip_controller/command", 1);
-    _servo_pub[1] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "L_hip2_controller/command", 1);
-    _servo_pub[2] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "L_thigh_controller/command", 1);
-    _servo_pub[3] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "L_calf_controller/command", 1);
-    _servo_pub[4] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "L_toe_controller/command", 1);
-    _servo_pub[5] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "R_hip_controller/command", 1);
-    _servo_pub[6] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "R_hip2_controller/command", 1);
-    _servo_pub[7] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "R_thigh_controller/command", 1);
-    _servo_pub[8] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "R_calf_controller/command", 1);
-    _servo_pub[9] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "R_toe_controller/command", 1);
+    _servo_pub[0] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "/L_hip_controller/command", 1);
+    _servo_pub[1] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "/L_hip2_controller/command", 1);
+    _servo_pub[2] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "/L_thigh_controller/command", 1);
+    _servo_pub[3] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "/L_calf_controller/command", 1);
+    _servo_pub[4] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "/L_toe_controller/command", 1);
+    _servo_pub[5] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "/R_hip_controller/command", 1);
+    _servo_pub[6] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "/R_hip2_controller/command", 1);
+    _servo_pub[7] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "/R_thigh_controller/command", 1);
+    _servo_pub[8] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "/R_calf_controller/command", 1);
+    _servo_pub[9] = _nm.advertise<livelybot_msg::MotorCmd>("/" + _robot_name + _use + "/R_toe_controller/command", 1);
 }
 void PaiIO::initRecv()
 {
@@ -135,23 +136,23 @@ void PaiIO::initRecv()
 #else   // 使用Gazebo
     _state_sub = _nm.subscribe("/gazebo/model_states", 1, &PaiIO::StateCallback, this);
 #endif
-    _servo_sub[0] = _nm.subscribe("/" + _robot_name + _use + "L_hip_controller/state", 1, &PaiIO::LhipCallback, this);
-    _servo_sub[1] = _nm.subscribe("/" + _robot_name + _use + "L_hip2_controller/state", 1, &PaiIO::Lhip2Callback, this);
-    _servo_sub[2] = _nm.subscribe("/" + _robot_name + _use + "L_thigh_controller/state", 1, &PaiIO::LthighCallback, this);
-    _servo_sub[3] = _nm.subscribe("/" + _robot_name + _use + "L_calf_controller/state", 1, &PaiIO::LcalfCallback, this);
-    _servo_sub[4] = _nm.subscribe("/" + _robot_name + _use + "L_toe_controller/state", 1, &PaiIO::LtoeCallback, this);
-    _servo_sub[5] = _nm.subscribe("/" + _robot_name + _use + "R_hip_controller/state", 1, &PaiIO::RhipCallback, this);
-    _servo_sub[6] = _nm.subscribe("/" + _robot_name + _use + "R_hip2_controller/state", 1, &PaiIO::Rhip2Callback, this);
-    _servo_sub[7] = _nm.subscribe("/" + _robot_name + _use + "R_thigh_controller/state", 1, &PaiIO::RthighCallback, this);
-    _servo_sub[8] = _nm.subscribe("/" + _robot_name + _use + "R_calf_controller/state", 1, &PaiIO::RcalfCallback, this);
-    _servo_sub[9] = _nm.subscribe("/" + _robot_name + _use + "R_toe_controller/state", 1, &PaiIO::RtoeCallback, this);
+    _servo_sub[0] = _nm.subscribe("/" + _robot_name + _use + "/L_hip_controller/state", 1, &PaiIO::LhipCallback, this);
+    _servo_sub[1] = _nm.subscribe("/" + _robot_name + _use + "/L_hip2_controller/state", 1, &PaiIO::Lhip2Callback, this);
+    _servo_sub[2] = _nm.subscribe("/" + _robot_name + _use + "/L_thigh_controller/state", 1, &PaiIO::LthighCallback, this);
+    _servo_sub[3] = _nm.subscribe("/" + _robot_name + _use + "/L_calf_controller/state", 1, &PaiIO::LcalfCallback, this);
+    _servo_sub[4] = _nm.subscribe("/" + _robot_name + _use + "/L_toe_controller/state", 1, &PaiIO::LtoeCallback, this);
+    _servo_sub[5] = _nm.subscribe("/" + _robot_name + _use + "/R_hip_controller/state", 1, &PaiIO::RhipCallback, this);
+    _servo_sub[6] = _nm.subscribe("/" + _robot_name + _use + "/R_hip2_controller/state", 1, &PaiIO::Rhip2Callback, this);
+    _servo_sub[7] = _nm.subscribe("/" + _robot_name + _use + "/R_thigh_controller/state", 1, &PaiIO::RthighCallback, this);
+    _servo_sub[8] = _nm.subscribe("/" + _robot_name + _use + "/R_calf_controller/state", 1, &PaiIO::RcalfCallback, this);
+    _servo_sub[9] = _nm.subscribe("/" + _robot_name + _use + "/R_toe_controller/state", 1, &PaiIO::RtoeCallback, this);
 }
 
 void PaiIO::StateCallback(const gazebo_msgs::ModelStates &msg)
 {
     // std::cout <<"StateCallback "<< std::endl;
     int robot_index = -1;
-    // std::cout << msg.name.size() << std::endl;
+    std::cout << msg.name.size() << std::endl;
     for (int i = 0; i < msg.name.size(); i++)
     {
         if (msg.name[i] == _robot_name + _use)
@@ -179,10 +180,10 @@ void PaiIO::StateCallback(const gazebo_msgs::ModelStates &msg)
     }
     else
     {
-        std::cout << "The robot name is incorrect,the initial name is" << _robot_name << ",but the name is not on the list" << std::endl;
+        std::cout << "The robot name is incorrect,the initial name is: " << _robot_name + _use<< ",but the name is not on the list" << std::endl;
         for (int i = 0; i < msg.name.size(); i++)
         {
-            std::cout << msg.name[i] << " " << _robot_name + "_gazebo" << std::endl;
+            std::cout << msg.name[i] << " " << _robot_name + _use<< std::endl;
         }
     }
 }
