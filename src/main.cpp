@@ -10,6 +10,7 @@
 #include "../include/common/PositionVelocityEstimator.h"
 #include "../include/FSM/FSM.h"
 #include <ros/ros.h>
+#include "jacobia.h"
 using namespace std;
 // 一个简单的demo，实现机器人站起来/蹲下的操作
 bool running = true;
@@ -70,7 +71,106 @@ int main(int argc, char **argv)
     std::cout << "init ok" << std::endl;
     signal(SIGINT, ShutDown);
     ///////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////jocbia////////////////////////////////////////////////
+    // jacobia left_j("left_leg_force");
+    jacobia j;
+    Eigen::MatrixXd left_jacobia;
+    Eigen::MatrixXd right_jacobia;
+    std::vector<double> joint_value_l, joint_value_r;
+    std::vector<std::vector<double>> joint_value;
+    for (size_t i = 0; i < 5; i++)
+    {
+        joint_value_l.push_back(0.0);
+    }
+    for (size_t i = 0; i < 5; i++)
+    {
+        joint_value_r.push_back(0.0);
+    }
+    joint_value.push_back(joint_value_l);
+    joint_value.push_back(joint_value_r);
+    double Fz, hd, h, old_h, Kz, d_hd, d_h, d_Kz;
+    old_h = hd = h = 0.3825;
+    Kz = 900;
+    d_Kz = 40;
+    double derta = 0.00002; // 2cm/s
+    double derta_t = 0.001;
+    d_hd = -derta / derta_t;
+    ///////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////simple control////////////////////////////////////////
+    for (size_t i = 0; i < 10; i++)
+    {
+        cmd->motorCmd[i].q = 0.0;
+        cmd->motorCmd[i].dq = 0.0;
+        cmd->motorCmd[i].tau = 0.0;
+        cmd->motorCmd[i].Kp = 0.0; // 50.0;
+        cmd->motorCmd[i].Kd = 0.0; // 0.010;
+    }
+    int cont = 0;
+    int cont_2 = 0;
+    while (ros::ok())
+    {
+        /////////////////////////////fresh target hight///////////////////
+        /////////////////////////////calculate F/T ///////////////////////
+        //  因为机old_h心在脚底板中心正上方,Fx=0,Fy=0,Tx=0,Ty=0,Tz=0
+        //  J(^T)*[Fx Fy Fz Tx Ty Tz](^T) = torque
+        printf("=====================================\n");
+        // hd -= derta;
+        cont++;
+        if (cont == 1000)
+            derta *= -1;
+        cont = 0;
+        h = ioInter->get_now_z();
+        d_h = (h - old_h) / derta_t;
+        Fz = Kz * (h - hd) -6;//- d_Kz * (d_h - d_hd) ;
+        old_h = h;
+        std::cout<<Kz * (h - hd)<<" "<<- d_Kz * (d_h - d_hd)<<std::endl;
+        std::cout << "now pos:" << h << " now vel:" << d_h << "\n"
+                  << "target pos:" << hd << " target vel:" << d_hd << "\n";
+        std::cout << Fz << "\n";
+        Eigen::VectorXd colVector(6);
+        colVector << 0.0, 0.0, Fz, 0.0, 0.0, 0.0;
+
+        for (size_t i = 0; i < 5; i++)
+        {
+            joint_value[0][i] = state->motorState[i].q;
+            joint_value[1][i] = state->motorState[i + 5].q;
+        }
+        j.getJacobian(joint_value);
+
+        // std::cout << "the state pos\n";
+        // for (size_t i = 0; i < 10; i++)
+        // {
+        //     std::cout << state->motorState[i].q << " ";
+        // }
+        // std::cout << "\n";
+
+        Eigen::VectorXd right_motor_torque = j.getRight_torque(colVector);
+        Eigen::VectorXd left_motor_torque = j.getLeft_torque(colVector);
+        // std::cout << "right Jacobian: \n"
+        //           << right_jacobia << std::endl;
+        // std::cout << "left Jacobian: \n"
+        //           << left_jacobia << std::endl;
+        std::cout << "right torque:\n"
+                  << right_motor_torque << std::endl;
+        std::cout << "left torque:\n"
+                  << left_motor_torque << std::endl;
+        if (cont_2 < 5)
+        {
+            cont_2++;
+        }
+        else
+        {
+            for (size_t i = 0; i < 5; i++)
+            {
+                cmd->motorCmd[i].tau = left_motor_torque[i];
+                cmd->motorCmd[i + 5].tau = right_motor_torque[i];
+            }
+            // cmd->motorCmd[2].tau*=1.2;
+            // cmd->motorCmd[7].tau*=1.2;
+        }
+        ioInter->sendRecv(cmd, state);
+        rate.sleep();
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////gazebo////////////////////////////////////////////////
@@ -92,7 +192,7 @@ int main(int argc, char **argv)
     _controlData->_lowCmd = cmd;
     _controlData->_lowState = state;
     FSM *_FSMController = new FSM(_controlData);
-    while(ros::ok())
+    while (ros::ok())
     {
         _FSMController->run();
         rate.sleep();

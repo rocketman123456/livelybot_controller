@@ -12,6 +12,7 @@ class IOInterface
         IOInterface(){}
         ~IOInterface(){}
         virtual void sendRecv(const LowlevelCmd *cmd, LowlevelState *state) = 0;
+        virtual float get_now_z() = 0;
         void zeroCmdPanel(){cmdPanel->setZero();} //secondary packaging
         void setPassive(){cmdPanel->setPassive();} //secondary packaging
         CmdPanel *cmdPanel;

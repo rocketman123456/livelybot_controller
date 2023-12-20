@@ -33,7 +33,7 @@ void PaiIO::sendRecv(const LowlevelCmd *cmd, LowlevelState *state)
 {
     // std::cout << "=================" << std::endl;
     sendCmd(cmd);
-    std::cout<<"paiIO sendRecv 1\n";
+    // std::cout<<"paiIO sendRecv 1\n";
 #if USE
     int num;
     motor_back_t motor_data;
@@ -48,15 +48,15 @@ void PaiIO::sendRecv(const LowlevelCmd *cmd, LowlevelState *state)
     }
 #else
     recvState(state);
-    std::cout<<"paiIO sendRecv 2\n";
+    // std::cout<<"paiIO sendRecv 2\n";
 #endif
 
     cmdPanel->updateVelCmd(state);
-    std::cout<<"paiIO sendRecv 3\n";
+    // std::cout<<"paiIO sendRecv 3\n";
     state->userCmd = cmdPanel->getUserCmd();
-    std::cout<<"paiIO sendRecv 4\n";
+    // std::cout<<"paiIO sendRecv 4\n";
     state->userValue = cmdPanel->getUserValue();
-    std::cout<<"paiIO sendRecv 5\n";
+    // std::cout<<"paiIO sendRecv 5\n";
 }
 void PaiIO::sendCmd(const LowlevelCmd *cmd)
 {
@@ -101,7 +101,7 @@ void PaiIO::recvState(LowlevelState *state)
         state->motorState[i].q = _highState.motorState[i].pos;
         state->motorState[i].dq = _highState.motorState[i].vel;
         state->motorState[i].tauEst = _highState.motorState[i].tau;
-        std::cout<<i<<" "<<state->motorState[i].q <<"\n";
+        // std::cout<<i<<" "<<state->motorState[i].q <<"\n";
     }
     for (int i = 0; i < 3; i++)
     {

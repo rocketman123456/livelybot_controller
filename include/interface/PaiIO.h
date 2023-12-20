@@ -25,6 +25,7 @@ private:
     livelybot_msg::HighState _highState;
     livelybot_msg::LowCmd _lowCmd;
     double f;
+
 public:
 #if USE // 使用真实机器人
     // send_recv _send_recv;
@@ -33,7 +34,7 @@ public:
     ros::Subscriber _servo_sub[10], _state_sub;
     ros::Publisher _servo_pub[10];
 #endif
-    PaiIO(std::string robot_name, const std::string spi_name,double dt);
+    PaiIO(std::string robot_name, const std::string spi_name, double dt);
     ~PaiIO();
     void sendCmd(const LowlevelCmd *cmd);
     void sendRecv(const LowlevelCmd *cmd, LowlevelState *state);
@@ -53,6 +54,10 @@ public:
     void RthighCallback(const livelybot_msg::MotorState &msg);
     void RcalfCallback(const livelybot_msg::MotorState &msg);
     void RtoeCallback(const livelybot_msg::MotorState &msg);
+    float get_now_z()
+    {
+        return _highState.position[2];
+    }
 #endif
 };
 
