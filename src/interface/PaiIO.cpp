@@ -13,13 +13,11 @@ PaiIO::PaiIO(std::string robot_name, const std::string spi_name, double dt) : IO
 #else
     // start subscriber
     initRecv();
-    ROS_INFO("initRecv");
     ros::AsyncSpinner subSpinner(1); // one threads
     subSpinner.start();
     usleep(3000); // wait for subscribers start
     // initialize publisher
     initSend();
-    ROS_INFO("initSend");
 #endif
     signal(SIGINT, RosShutDown);
 
@@ -31,9 +29,7 @@ PaiIO::~PaiIO()
 }
 void PaiIO::sendRecv(const LowlevelCmd *cmd, LowlevelState *state)
 {
-    // std::cout << "=================" << std::endl;
     sendCmd(cmd);
-    // std::cout<<"paiIO sendRecv 1\n";
 #if USE
     int num;
     motor_back_t motor_data;
@@ -52,11 +48,8 @@ void PaiIO::sendRecv(const LowlevelCmd *cmd, LowlevelState *state)
 #endif
 
     cmdPanel->updateVelCmd(state);
-    // std::cout<<"paiIO sendRecv 3\n";
     state->userCmd = cmdPanel->getUserCmd();
-    // std::cout<<"paiIO sendRecv 4\n";
     state->userValue = cmdPanel->getUserValue();
-    // std::cout<<"paiIO sendRecv 5\n";
 }
 void PaiIO::sendCmd(const LowlevelCmd *cmd)
 {
@@ -69,8 +62,6 @@ void PaiIO::sendCmd(const LowlevelCmd *cmd)
     }
     rb.motor_send();
 #else
-
-    // std::cout<<"paiIO sendCmd 1\n";
     for (int i = 0; i < 10; i++)
     {
         _lowCmd.motorCmd[i].mode = 0X0A; // alwasy set it to 0X0A
@@ -81,15 +72,10 @@ void PaiIO::sendCmd(const LowlevelCmd *cmd)
         _lowCmd.motorCmd[i].Kd = cmd->motorCmd[i].Kd;
         _lowCmd.motorCmd[i].Kp = cmd->motorCmd[i].Kp;
     }
-
-    // std::cout<<_lowCmd.motorCmd[6].q<<std::endl;
-
-    // std::cout<<"paiIO sendCmd 2\n";
     for (int m = 0; m < 10; m++)
     {
         _servo_pub[m].publish(_lowCmd.motorCmd[m]);
     }
-    // std::cout<<"paiIO sendCmd 3\n";
 #endif
     ros::spinOnce();
 }

@@ -54,10 +54,10 @@ void RobotState::set(flt* p_, flt* v_, flt* q_, flt* w_, flt* r_,flt yaw_)
 
 void RobotState::print()
 {
-//    cout<<"Robot State:"<<endl<<"Position\n"<<p.transpose()
-//        <<"\nVelocity\n"<<v.transpose()<<"\nAngular Veloctiy\n"
-//        <<w.transpose()<<"\nRotation\n"<<R<<"\nYaw Rotation\n"
-//        <<R_yaw<<"\nFoot Locations\n"<<r_feet<<"\nInertia\n"<<I_body<<endl;
+   cout<<"Robot State:"<<endl<<"Position\n"<<p.transpose()
+       <<"\nVelocity\n"<<v.transpose()<<"\nAngular Veloctiy\n"
+       <<w.transpose()<<"\nRotation\n"<<R<<"\nYaw Rotation\n"
+       <<R_yaw<<"\nFoot Locations\n"<<r_feet<<"\nInertia\n"<<I_body<<endl;
 }
 
 

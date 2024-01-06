@@ -16,11 +16,9 @@ find_package(catkin REQUIRED COMPONENTS
     geometry_msgs
     livelybot_msg  
     livelybot_serial 
-    moveit_core
-    moveit_ros_planning
 )
 catkin_package(
-    CATKIN_DEPENDS moveit_core moveit_ros_planning
+    CATKIN_DEPENDS 
     livelybot_msg 
     INCLUDE_DIRS include
 )

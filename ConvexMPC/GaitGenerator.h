@@ -21,7 +21,10 @@ using namespace std;
  *
  */
 
-
+/*
+生成和管理双足机器人的步态模式
+步态模式是指机器人行走时脚步的节奏和顺序。这个类包含了一些方法来计算和管理这些步态模式。
+*/
 class Gait
 {
 public:
@@ -31,7 +34,9 @@ public:
   Vec2<double> getSwingSubPhase();
   int* mpc_gait();
   void setIterations(int iterationsPerMPC, int currentIteration);
+  //表示站立相的时间，即脚与地面接触的时间
   int _stance;
+  //表示摆动相的时间，即脚在空中摆动的时间
   int _swing;
 
 

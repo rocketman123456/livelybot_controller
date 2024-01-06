@@ -26,6 +26,7 @@ Gait::~Gait()
 /******************************************************************************************************/
 
 // Compute and return the current subphase of contact.
+//计算并返回接触的当前子阶段。接触子阶段是步态周期中机器人的脚与地面接触的部分。
 Vec2<double> Gait::getContactSubPhase()
 {
   Array2d progress = _phase - _offsetsPhase; 
@@ -51,6 +52,7 @@ Vec2<double> Gait::getContactSubPhase()
 /******************************************************************************************************/
 
 // Compute and return the current subphase of swing.
+//计算并返回摆动的当前子阶段。摆动子阶段是步态周期中机器人的脚在空中的部分。
 Vec2<double> Gait::getSwingSubPhase()
 {
   Array2d swing_offset = _offsetsPhase + _durationsPhase; 
@@ -82,6 +84,7 @@ Vec2<double> Gait::getSwingSubPhase()
 /******************************************************************************************************/
 
 // Generate and return the MPC gait table.
+// 生成并返回MPC步态表。这个表用于确定每个MPC段中每只脚的接触状态。
 int *Gait::mpc_gait()
 {
   for (int i = 0; i < _nIterations; i++)
@@ -106,6 +109,7 @@ int *Gait::mpc_gait()
 /******************************************************************************************************/
 
 // Update iteration and phase based on the given values.
+// 根据给定的值更新迭代和相位。此方法用于将步态与MPC的当前迭代同步。
 void Gait::setIterations(int iterationsPerMPC, int currentIteration)
 {
   _iteration = (currentIteration / iterationsPerMPC) % _nIterations;

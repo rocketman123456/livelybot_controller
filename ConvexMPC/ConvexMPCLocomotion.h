@@ -16,7 +16,7 @@ using Eigen::Array2i;
 using Eigen::Array2f;
 
 using namespace std;
- 
+
 /**
  * @file ConvexMPCLocomotion.h
  * @brief Convex Model Predictive Control (MPC) for Bipedal Locomotion
@@ -70,6 +70,7 @@ private:
     Vec3<double> world_position_desired;
     Vec3<double> rpy_int;
     Vec3<double> rpy_comp;
+    //pFoot是计算髋关节到世界坐标系的位置
     Vec3<double> pFoot[2];
     CMPC_Result result;
     double trajAll[12*10];
