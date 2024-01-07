@@ -39,43 +39,7 @@ void Constraints::CalculateUpperBound() {
         L_b(8*leg + 7 + 16*i) = 0.0f ;
     }
   }  
-//   for(s16 i = 0; i < horizon_; i++){
-//       U_b(0 + Num_Constraints*i) = BIG_NUMBER_;
-//       U_b(1 + Num_Constraints*i) = BIG_NUMBER_;
-//       U_b(2 + Num_Constraints*i) = BIG_NUMBER_;
-//       U_b(3 + Num_Constraints*i) = BIG_NUMBER_;
 
-//       U_b(4 + Num_Constraints*i) = 0.01;
-
-//     //   U_b(5 + Num_Constraints*i) = motorTorqueLimit_;
-//     //   U_b(6 + Num_Constraints*i) = motorTorqueLimit_;
-//     //   U_b(7 + Num_Constraints*i) = motorTorqueLimit_;
-//     //   U_b(8 + Num_Constraints*i) = motorTorqueLimit_;      
-//     //   U_b(9 + Num_Constraints*i) = motorTorqueLimit_;
-
-//       U_b(5 + Num_Constraints*i) = BIG_NUMBER_;      
-//       U_b(6 + Num_Constraints*i) = BIG_NUMBER_;
-
-//       U_b(7 + Num_Constraints*i) = f_max_ * gait_(2*i + 0) ;
-//       // 
-//       U_b(8 + Num_Constraints*i) = BIG_NUMBER_;
-//       U_b(9+ Num_Constraints*i) = BIG_NUMBER_;
-//       U_b(10 + Num_Constraints*i) = BIG_NUMBER_;
-//       U_b(11 + Num_Constraints*i) = BIG_NUMBER_;
-      
-//       U_b(12 + Num_Constraints*i) = 0.01;
-
-//     //   U_b(18 + Num_Constraints*i) = motorTorqueLimit_;
-//     //   U_b(19 + Num_Constraints*i) = motorTorqueLimit_;
-//     //   U_b(20 + Num_Constraints*i) = motorTorqueLimit_;
-//     //   U_b(21 + Num_Constraints*i) = motorTorqueLimit_;      
-//     //   U_b(22 + Num_Constraints*i) = motorTorqueLimit_;
-
-//       U_b(13 + Num_Constraints*i) = BIG_NUMBER_;      
-//       U_b(14 + Num_Constraints*i) = BIG_NUMBER_;
-
-//       U_b(15 + Num_Constraints*i) = f_max_ * gait_(2*i + 1);
-//   }
 
 }
 
@@ -94,12 +58,6 @@ void Constraints::CalculateLowerBound() {
       L_b(5 + Num_Constraints*i) = 0.0f;      
       L_b(6 + Num_Constraints*i) = 0.0f;
 
-    //   L_b(7 + Num_Constraints*i) = -motorTorqueLimit_;
-    //   L_b(8 + Num_Constraints*i) = -motorTorqueLimit_;
-    //   L_b(9 + Num_Constraints*i) = -motorTorqueLimit_;
-    //   L_b(10 + Num_Constraints*i) = -motorTorqueLimit_;      
-    //   L_b(11 + Num_Constraints*i) = -motorTorqueLimit_;
-
       L_b(7 + Num_Constraints*i) = 0.0f ;
       // 
       L_b(8 + Num_Constraints*i) = 0.0f;
@@ -110,12 +68,6 @@ void Constraints::CalculateLowerBound() {
       L_b(12 + Num_Constraints*i) = 0.0f;
       L_b(13 + Num_Constraints*i) = 0.0f;      
       L_b(14 + Num_Constraints*i) = 0.0f;
-
-    //   L_b(20 + Num_Constraints*i) = -motorTorqueLimit_;
-    //   L_b(21 + Num_Constraints*i) = -motorTorqueLimit_;
-    //   L_b(22 + Num_Constraints*i) = -motorTorqueLimit_;
-    //   L_b(23 + Num_Constraints*i) = -motorTorqueLimit_;      
-    //   L_b(24 + Num_Constraints*i) = -motorTorqueLimit_;
 
       L_b(15 + Num_Constraints*i) = 0.0f;
   }    

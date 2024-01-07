@@ -106,9 +106,9 @@ void LegController::updateCommand(LowlevelCmd* cmd){
 void computeLegJacobianAndPosition(Biped& _biped, Vec5<double>& q, Mat65<double>* J_f_m, Mat35<double>* J_f, 
                                        Vec3<double>* p, int leg)
 {
-    q(2) = q(2) + 0.25*3.14159;
-    q(3) = q(3) - 0.5*3.14159;
-    q(4) = q(4) + 0.25*3.14159;
+    q(2) = q(2) - 0.25*3.14159;//-0.25  +0.25
+    q(3) = q(3) + 0.5*3.14159;//+0.5  -0.5
+    q(4) = q(4) + 0.25*3.14159;//+0.25  -0.25
 
     double q0 = q(0);
     double q1 = q(1);

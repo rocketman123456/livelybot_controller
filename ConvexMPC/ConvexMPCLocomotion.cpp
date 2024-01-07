@@ -28,6 +28,7 @@ ConvexMPCLocomotion::ConvexMPCLocomotion(double _dt, int _iterations_between_mpc
 
 void ConvexMPCLocomotion::run(ControlFSMData &data)
 {
+  double hight = 0.55;
   bool omniMode = false;
 
   auto &seResult = data._stateEstimator->getResult();
@@ -58,7 +59,7 @@ void ConvexMPCLocomotion::run(ControlFSMData &data)
   // 复杂操作是从LIO或VIO拿到里程计数据
   world_position_desired[0] += dt * v_des_world[0];
   world_position_desired[1] += dt * v_des_world[1];
-  world_position_desired[2] = 0.55;
+  world_position_desired[2] = hight;
   // 这是对机器人的质心的高度的需求，是机器人初始状态腿部弯曲且静止的高度
 
   // get then foot location in world frame
@@ -118,7 +119,7 @@ void ConvexMPCLocomotion::run(ControlFSMData &data)
     {
       pBody_des[0] = seResult.position[0];
       pBody_des[1] = seResult.position[1];
-      pBody_des[2] = 0.55;
+      pBody_des[2] = hight;
       vBody_des[0] = 0;
       vBody_des[0] = 0;
     }
@@ -254,7 +255,7 @@ void ConvexMPCLocomotion::run(ControlFSMData &data)
       {
         side = 1.0;
       }
-      Vec3<double> hipOffset = {0, side * -0.02, -0.136};
+      Vec3<double> hipOffset = {0, side * -0.075, 0.0};
       
       Vec3<double> pDesLeg = seResult.rBody * (pDesFootWorld - seResult.position) - hipOffset;
       Vec3<double> vDesLeg = seResult.rBody * (vDesFootWorld - seResult.vWorld);
@@ -337,13 +338,13 @@ void ConvexMPCLocomotion::updateMPCIfNeeded(int *mpcTable, ControlFSMData &data,
     // Joint angles offset correction
     // 对关节角度进行偏移校正，因为在urdf中添加了旋转偏置，这里要补偿上
     // ???????但urdf里是0.25/-0.5/0.25
-    q(2) += 0.3 * PI;
-    q(3) -= 0.6 * PI;
-    q(4) += 0.3 * PI;
+    q(2) += 0.25 * PI;
+    q(3) -= 0.5 * PI;
+    q(4) += 0.25 * PI;
 
-    q(7) += 0.3 * PI;
-    q(8) -= 0.6 * PI;
-    q(9) += 0.3 * PI;
+    q(7) += 0.25 * PI;
+    q(8) -= 0.5 * PI;
+    q(9) += 0.25 * PI;
 
     double PI2 = 2 * PI;
     for (int i = 0; i < 10; i++)
@@ -397,7 +398,7 @@ void ConvexMPCLocomotion::updateMPCIfNeeded(int *mpcTable, ControlFSMData &data,
                               seResult.rpy[2],                                   // 2
                               xStart,                                            // 3
                               yStart,                                            // 4
-                              0.55,                                              // 5  ？？？？？？？？是否需要修改
+                              hight,                                              // 5  ？？？？？？？？是否需要修改
                               0,                                                 // 6
                               0,                                                 // 7
                               stateCommand->data.stateDes[11],                   // 8

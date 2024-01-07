@@ -460,7 +460,7 @@ void solve_mpc(update_data_t *update, problem_setup *setup)
       X_d(13 * i + j, 0) = update->traj[12 * i + j];
   }
 
-  double motorTorqueLimit = 33.5;
+  double motorTorqueLimit = 10;
 
 
   for (s16 leg = 0; leg < 2; leg ++){
