@@ -1,10 +1,11 @@
 #ifndef LOWLEVELSTATE_H
 #define LOWLEVELSTATE_H
 
+#include "common/cppTypes.h"
+#include "common/enumClass.h"
+
 #include <iostream>
 #include <string>
-#include "../common/cppTypes.h"
-#include "../common/enumClass.h"
 
 struct UserValue{
     float lx;

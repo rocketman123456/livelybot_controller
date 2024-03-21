@@ -1,4 +1,4 @@
-#include "../../include/common/LegController.h"
+#include "common/LegController.h"
 #include <eigen3/Eigen/Core>
 
 // upper level of joint controller 

@@ -1,11 +1,12 @@
 #ifndef CONVEXMPCLOCOMOTION_H
 #define CONVEXMPCLOCOMOTION_H
 
-#include <eigen3/Eigen/Dense>
-#include "../include/common/FootSwingTrajectory.h"
-#include "../include/common/ControlFSMData.h"
-#include "../include/common/cppTypes.h"
+#include "common/FootSwingTrajectory.h"
+#include "common/ControlFSMData.h"
+#include "common/cppTypes.h"
 #include "GaitGenerator.h"
+
+#include <eigen3/Eigen/Dense>
 #include <fstream>
 
 using Eigen::Array4f;

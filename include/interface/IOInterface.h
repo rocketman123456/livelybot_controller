@@ -1,9 +1,10 @@
 #ifndef IOINTERFACE_H
 #define IOINTERFACE_H
 
-#include "../messages/LowLevelCmd.h"
-#include "../messages/LowlevelState.h"
-#include "CmdPanel.h"
+#include "messages/LowLevelCmd.h"
+#include "messages/LowlevelState.h"
+#include "interface/CmdPanel.h"
+
 #include <string>
 
 class IOInterface

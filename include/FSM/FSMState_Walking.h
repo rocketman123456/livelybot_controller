@@ -1,8 +1,8 @@
 #ifndef WALKING_H
 #define WALKING_H
 
-#include "FSMState.h"
-#include "../../ConvexMPC/ConvexMPCLocomotion.h"
+#include "FSM/FSMState.h"
+#include "ConvexMPC/ConvexMPCLocomotion.h"
 
 class FSMState_Walking: public FSMState
 {

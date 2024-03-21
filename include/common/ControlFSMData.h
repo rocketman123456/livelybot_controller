@@ -1,13 +1,13 @@
 #ifndef CONTROLFSMDATA_H
 #define CONTROLFSMDATA_H
 
-#include "DesiredCommand.h"
-#include "LegController.h"
-#include "Biped.h"
-#include "../messages/LowLevelCmd.h"
-#include "../messages/LowlevelState.h"
-#include "../interface/IOInterface.h"
-#include "StateEstimatorContainer.h"
+#include "common/DesiredCommand.h"
+#include "common/LegController.h"
+#include "common/Biped.h"
+#include "common/StateEstimatorContainer.h"
+#include "messages/LowLevelCmd.h"
+#include "messages/LowlevelState.h"
+#include "interface/IOInterface.h"
 
 struct ControlFSMData
 {

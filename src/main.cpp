@@ -1,14 +1,16 @@
+#include "interface/PaiIO.h"
+#include "common/ControlFSMData.h"
+#include "common/OrientationEstimator.h"
+#include "common/PositionVelocityEstimator.h"
+#include "FSM/FSM.h"
+
 #include <iostream>
 #include <unistd.h>
 #include <csignal>
 #include <sched.h>
 #include <string>
 #include <stdlib.h>
-#include "../include/interface/PaiIO.h"
-#include "../include/common/ControlFSMData.h"
-#include "../include/common/OrientationEstimator.h"
-#include "../include/common/PositionVelocityEstimator.h"
-#include "../include/FSM/FSM.h"
+
 #include <ros/ros.h>
 using namespace std;
 // 一个简单的demo，实现机器人站起来/蹲下的操作

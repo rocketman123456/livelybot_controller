@@ -1,10 +1,10 @@
 #ifndef FSM_H
 #define FSM_H
 
-#include "FSMState.h"
-#include "FSMState_Passive.h"
-#include "FSMState_Walking.h"
-#include "../common/enumClass.h"
+#include "FSM/FSMState.h"
+#include "FSM/FSMState_Passive.h"
+#include "FSM/FSMState_Walking.h"
+#include "common/enumClass.h"
 
 struct FSMStateList{
     FSMState *invalid;

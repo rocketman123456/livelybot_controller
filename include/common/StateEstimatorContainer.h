@@ -37,8 +37,8 @@ SOFTWARE.
 
 #pragma once
 
-#include "LegController.h"
-#include "../messages/LowlevelState.h"
+#include "common/LegController.h"
+#include "messages/LowlevelState.h"
 
 /*!
  * Result of state estimation

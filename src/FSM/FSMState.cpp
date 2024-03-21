@@ -1,4 +1,4 @@
-#include "../../include/FSM/FSMState.h"
+#include "FSM/FSMState.h"
 
 FSMState::FSMState(ControlFSMData *data, FSMStateName stateName, std::string stateNameStr):
             _data(data), _stateName(stateName), _stateNameStr(stateNameStr)

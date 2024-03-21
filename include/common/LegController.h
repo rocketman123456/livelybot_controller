@@ -25,10 +25,10 @@ SOFTWARE.
 #ifndef LEGCONTROLLER_H
 #define LEGCONTROLLER_H
 
-#include "cppTypes.h"
-#include "../messages/LowlevelState.h"
-#include "../messages/LowLevelCmd.h"
-#include "Biped.h"
+#include "common/cppTypes.h"
+#include "common/Biped.h"
+#include "messages/LowlevelState.h"
+#include "messages/LowLevelCmd.h"
 
 
 /*!

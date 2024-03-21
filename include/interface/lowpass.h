@@ -1,5 +1,6 @@
 #ifndef _LOWPASS_H_
 #define _LOWPASS_H_
+
 #include <ros/ros.h>
 
 class lowpass_c

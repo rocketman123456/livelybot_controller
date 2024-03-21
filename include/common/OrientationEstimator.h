@@ -12,8 +12,8 @@
 #ifndef PROJECT_ORIENTATIONESTIMATOR_H
 #define PROJECT_ORIENTATIONESTIMATOR_H
 
-#include "StateEstimatorContainer.h"
-#include "Math/orientation_tools.h"
+#include "common/StateEstimatorContainer.h"
+#include "common/Math/orientation_tools.h"
 
 /*!
  * "Cheater" estimator for orientation which always returns the correct value in simulation

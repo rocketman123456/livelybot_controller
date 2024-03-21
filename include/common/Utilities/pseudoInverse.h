@@ -1,7 +1,10 @@
+#pragma once
+
+#include "common/cppTypes.h"
+
 #include <stdio.h>
 #include <eigen3/Eigen/LU>
 #include <eigen3/Eigen/SVD>
-#include "../cppTypes.h"
 using namespace std;
 
 /*!

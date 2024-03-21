@@ -1,14 +1,15 @@
-#include "SolverMPC.h"
-#include "common_types.h"
-#include "convexMPC_interface.h"
-#include "RobotState.h"
+#include "ConvexMPC/SolverMPC.h"
+#include "ConvexMPC/common_types.h"
+#include "ConvexMPC/convexMPC_interface.h"
+#include "ConvexMPC/RobotState.h"
+#include "common/Utilities/Timer.h"
+#include "qpOASES.hpp"
+
 #include <eigen3/Eigen/Dense>
 #include <cmath>
 #include <eigen3/unsupported/Eigen/MatrixFunctions>
-#include "../third_party/qpOASES/include/qpOASES.hpp"
 #include <stdio.h>
 #include <sys/time.h>
-#include "../include/common/Utilities/Timer.h"
 #include <fstream>
 
 

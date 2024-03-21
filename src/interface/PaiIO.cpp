@@ -1,4 +1,5 @@
-#include "../../include/interface/PaiIO.h"
+#include "interface/PaiIO.h"
+
 inline void RosShutDown(int sig)
 {
     ROS_INFO("ROS interface shutting down!");

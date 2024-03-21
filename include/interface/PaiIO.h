@@ -8,9 +8,9 @@
 #include "livelybot_msg/HighState.h"
 #include "livelybot_msg/LowCmd.h"
 
-#include "IOInterface.h"
-#include "KeyBoard.h"
-#include "../use.h"
+#include "interface/IOInterface.h"
+#include "interface/KeyBoard.h"
+#include "use.h"
 
 #include "hardware/robot.h"
 // #define USE 1 // 0是Gazebo 1是真实机器人

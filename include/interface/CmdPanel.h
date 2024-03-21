@@ -1,8 +1,9 @@
 #ifndef CMDPANEL_H
 #define CMDPANEL_H
 
-#include "../common/enumClass.h"
-#include "../messages/LowlevelState.h"
+#include "common/enumClass.h"
+#include "messages/LowlevelState.h"
+
 #include <pthread.h>
 
 struct WaypointCmd{
@@ -32,7 +33,7 @@ public:
     virtual void updateVelCmd(const LowlevelState *state){};
 
 protected:
-    virtual void *run(void *arg){};
+    virtual void* run(void *arg) { return nullptr; };
     UserCommand userCmd;
     UserValue userValue;
 };

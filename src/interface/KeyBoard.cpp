@@ -1,4 +1,5 @@
-#include "../../include/interface/KeyBoard.h"
+#include "interface/KeyBoard.h"
+
 #include <iostream>
 
 template<typename T>

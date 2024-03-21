@@ -7,12 +7,13 @@
 #ifndef DESIREDCOMMAND_H
 #define DESIREDCOMMAND_H
 
-#include "cppTypes.h"
+#include "common/cppTypes.h"
+#include "common/StateEstimatorContainer.h"
+#include "interface/CmdPanel.h"
+
 #include <signal.h>
 #include <stdio.h>
 #include <termios.h>
-#include "StateEstimatorContainer.h"
-#include "../interface/CmdPanel.h"
 
 struct DesiredStateData{
 

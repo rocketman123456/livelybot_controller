@@ -1,6 +1,9 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 
+#include "interface/CmdPanel.h"
+#include "common/cppTypes.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
@@ -8,8 +11,6 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <termios.h>
-#include "CmdPanel.h"
-#include "../common/cppTypes.h"
 
 class KeyBoard : public CmdPanel{
 public:

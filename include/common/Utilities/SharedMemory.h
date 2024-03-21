@@ -7,6 +7,8 @@
 #ifndef PROJECT_SHAREDMEMORY_H
 #define PROJECT_SHAREDMEMORY_H
 
+#include "common/cTypes.h"
+
 #include <fcntl.h>
 #include <semaphore.h>
 #include <sys/mman.h>
@@ -16,9 +18,6 @@
 #include <cstring>
 #include <stdexcept>
 #include <string>
-
-#include "cTypes.h"
-
 
 #define DEVELOPMENT_SIMULATOR_SHARED_MEMORY_NAME "development-simulator"
 

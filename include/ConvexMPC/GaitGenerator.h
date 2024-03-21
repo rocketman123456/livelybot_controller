@@ -1,7 +1,8 @@
 #pragma once
 
+#include "common/cppTypes.h"
+
 #include <iostream>
-#include "../include/common/cppTypes.h"
 
 using Eigen::Array4f;
 using Eigen::Array4i;

@@ -1,14 +1,15 @@
 #ifndef FSMSTATE_H
 #define FSMSTATE_H
 
+#include "common/ControlFSMData.h"
+#include "common/cppTypes.h"
+#include "common/enumClass.h"
+#include "interface/CmdPanel.h"
+#include "messages/LowLevelCmd.h"
+#include "messages/LowlevelState.h"
+
 #include <string>
 #include <iostream>
-#include "../common/ControlFSMData.h"
-#include "../common/cppTypes.h"
-#include "../common/enumClass.h"
-#include "../interface/CmdPanel.h"
-#include "../messages/LowLevelCmd.h"
-#include "../messages/LowlevelState.h"
 
 class FSMState
 {

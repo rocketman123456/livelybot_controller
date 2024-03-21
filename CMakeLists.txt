@@ -28,7 +28,7 @@ include_directories(
     ${Boost_INCLUDE_DIR}
     ${catkin_INCLUDE_DIRS}
     ${GAZEBO_INCLUDE_DIRS}
-    #${GAZEBO_LIBRARY_DIRS}
+    third_party/qpOASES/include
 )
 link_directories(
     ${GAZEBO_LIBRARY_DIRS}
@@ -37,7 +37,7 @@ file(GLOB_RECURSE SRC_LIST
 "src/*.cpp"
 "src/*/*.cpp"
 "src/*/*.h"
-"ConvexMPC/*.cpp"
+# "ConvexMPC/*.cpp"
 )
 add_subdirectory(third_party/qpOASES)
 add_executable(main src/main.cpp  ${SRC_LIST} )

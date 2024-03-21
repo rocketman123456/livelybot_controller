@@ -1,8 +1,9 @@
+#include "common/Utilities/Timer.h"
+#include "common/Math/orientation_tools.h"
+#include "ConvexMPC/ConvexMPCLocomotion.h"
+#include "ConvexMPC/convexMPC_interface.h"
+
 #include <iostream>
-#include "../include/common/Utilities/Timer.h"
-#include "../include/common/Math/orientation_tools.h"
-#include "ConvexMPCLocomotion.h"
-#include "convexMPC_interface.h"
 
 using namespace ori;
 using Eigen::Dynamic;
@@ -392,7 +393,7 @@ void ConvexMPCLocomotion::updateMPCIfNeeded(int *mpcTable, ControlFSMData &data,
     // Vec3<double> ori_des_world;
     ori_des_world << stateCommand->data.stateDes[3], stateCommand->data.stateDes[4], stateCommand->data.stateDes[5];
     //期望的姿态
-    
+    double hight = 0.55;
     double trajInitial[12] = {/*rpy_comp[0] + */ stateCommand->data.stateDes[3], // 0 //MPC的初始轨迹
                               /*rpy_comp[1] + */ stateCommand->data.stateDes[4], // 1
                               seResult.rpy[2],                                   // 2

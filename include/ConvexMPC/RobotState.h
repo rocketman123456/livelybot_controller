@@ -1,8 +1,9 @@
 #ifndef _RobotState
 #define _RobotState
 
+#include "ConvexMPC/common_types.h"
+
 #include <eigen3/Eigen/Dense>
-#include "common_types.h"
 
 using Eigen::Matrix;
 using Eigen::Quaternionf;

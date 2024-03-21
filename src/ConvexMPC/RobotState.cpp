@@ -1,4 +1,5 @@
-#include "RobotState.h"
+#include "ConvexMPC/RobotState.h"
+
 #include <eigen3/Eigen/Dense>
 #include <iostream>
 #include <math.h>

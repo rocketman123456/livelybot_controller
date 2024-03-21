@@ -11,8 +11,6 @@
 #define ENABLE_FOOTSENSOR  0    //是否使能足底传感器
 #define ENABLE_STOP        0    //是否使能通讯断开让所有电机停在当前位置
 
-
-
 #define MOTOR_SET_LENGTH 22
 #define MOTOR_STATUS_LENGTH 17 
 #define YJ901S_DATA_SIZE 24
@@ -22,12 +20,10 @@
 #define FOOTSENSOR1  0x01
 #define FOOTSENSOR2  0x02
 
-
 //调试开关
 // #define DEBUG 
 // #define RX_DEBUG
 // #define TX_DEBUG
 // #define PARSE_DEBUG
-
 
 #endif // !_Config_H_

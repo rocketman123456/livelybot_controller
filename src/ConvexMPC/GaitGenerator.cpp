@@ -1,4 +1,4 @@
-#include "GaitGenerator.h"
+#include "ConvexMPC/GaitGenerator.h"
 
 // ====================== GAIT Class Implementation ======================= //
 

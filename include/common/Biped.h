@@ -1,8 +1,10 @@
 #ifndef PROJECT_BIPED_H
 #define PROJECT_BIPED_H
 
+#include "common/cppTypes.h"
+
 #include <vector>
-#include "cppTypes.h"
+
 class Biped
 {
 public:

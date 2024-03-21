@@ -8,7 +8,7 @@
 #ifndef CHEETAH_SOFTWARE_FOOTSWINGTRAJECTORY_H
 #define CHEETAH_SOFTWARE_FOOTSWINGTRAJECTORY_H
 
-#include "cppTypes.h"
+#include "common/cppTypes.h"
 
 /*!
  * A foot swing trajectory for a single foot
